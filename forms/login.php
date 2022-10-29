@@ -47,6 +47,30 @@
                     <p>Don't Have an account yet!: <br><a href="register.php">Register</a></p>
                 </div>
             </div>
+            <?php
+        if (isset($_GET['error'])) {
+            $error = $_GET['error'];
+            if ($error == "WrongPasswordOrEmail") {
+                echo "<p style='color: red; '> Wrong Password Or Email! </P>"; exit();
+            } elseif ($error == "userExist") {
+                echo "<p style='color: red;  '> User Exist! </P>"; exit();
+            } elseif ($error == "PasswordTaken") {
+                echo "<p style='color: red; '> Password Taken!</P>"; exit();
+            } elseif ($error == "WrongEmail") {
+                echo "<p style='color: red; '> Wrong Email!</P>"; exit();
+            }
+        }elseif (isset($_GET['update'])) {
+            $update = $_GET['update'];
+            if ($update == "UpdateSuccessful") {
+                echo "<p style='color: green; '> Update Successful Pls Login </P>"; exit();
+            } 
+        }elseif (isset($_GET['login'])) {
+            $login = $_GET['login'];
+            if ($login == "Success") {
+                echo "<p style='color: green; '> Login was Successful </P>"; exit();
+            } 
+        }
+        ?>
         </form>
    
     

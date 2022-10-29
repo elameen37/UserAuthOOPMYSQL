@@ -1,14 +1,16 @@
 <?php
 include_once 'Dbh.php';
 
-//session_start();
 
-class UserAuth extends Dbh {
+class UserAuth extends Dbh
+{
     private static $db;
 
-    public function __construct() {
-        $this->db = new Dbh();
+    public function __construct()
+    {
+        self::$db = new Dbh();
     }
+
 
     // register user
     public function register($fullname, $email, $password, $confirmPassword, $country, $gender)
@@ -29,15 +31,17 @@ class UserAuth extends Dbh {
         }
     }
 
+
     // login user
-    public function login($email, $password) {
+    public function login($email, $password)
+    {
         $conn = self::$db->connect();
         $sql = "SELECT * FROM Students WHERE email='$email' AND `password`='$password' LIMIT 1";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             $userData = $result->fetch_assoc();
             if ($userData['email'] === $email && $userData['password'] === $password) {
-                //session_start();
+                session_start();
 
                 $_SESSION['username'] = $userData['full_names'];
                 header("Location: dashboard.php?login=Success");
@@ -48,20 +52,24 @@ class UserAuth extends Dbh {
         }
     }
 
+
     // get user
-    public function getUser($username) {
-        $conn = $this->db->connect();
+    public function getUser($username)
+    {
+        $conn = self::$db->connect();
         $sql = "SELECT * FROM users WHERE username = '$username'";
         $result = $conn->query($sql);
-        if($result->num_rows > 0){
+        if ($result->num_rows > 0) {
             return $result->fetch_assoc();
         } else {
             return false;
         }
     }
 
-    // get all users
-    public function getAllUsers() {
+
+    // get all user
+    public function getAllUsers()
+    {
         $conn = self::$db->connect();
         $sql = "SELECT * FROM Students";
         $result = $conn->query($sql);
@@ -96,8 +104,10 @@ class UserAuth extends Dbh {
         }
     }
 
+
     // delete user
-    public function deleteUser($id) {
+    public function deleteUser($id)
+    {
         $conn = UserAuth::$db->connect();
 
         $sql = "DELETE FROM Students WHERE id = '$id'";
@@ -108,8 +118,10 @@ class UserAuth extends Dbh {
         }
     }
 
+
     // update user
-    public function updateUser($email, $password) {
+    public function updateUser($email, $password)
+    {
         $conn = self::$db->connect();
         $sql = "UPDATE students SET password = '$password' WHERE email = '$email' LIMIT 1";
         if ($conn->query($sql) === TRUE) {
@@ -121,8 +133,10 @@ class UserAuth extends Dbh {
         }
     }
 
+
     // get user by name
-    public function checkEmailExist($email) {
+    public function checkEmailExist($email)
+    {
         $conn = self::$db->connect();
         $sql = "SELECT * FROM students WHERE email = '$email'";
         $result = $conn->query($sql);
@@ -133,8 +147,10 @@ class UserAuth extends Dbh {
         }
     }
 
+
     // logout user
-    public function logout($email) {
+    public function logout($email)
+    {
         if (isset($_SESSION['username']) == ['username']) {
             session_unset();
             session_destroy();
@@ -142,8 +158,10 @@ class UserAuth extends Dbh {
         }
     }
 
-    // confirm password
-    public function confirmPasswordMatch($password, $confirmPassword) {
+
+    // confirm user password
+    public function confirmPasswordMatch($password, $confirmPassword)
+    {
         if ($password === $confirmPassword) {
             return true;
         } else {

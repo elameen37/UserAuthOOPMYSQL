@@ -9,7 +9,7 @@ class Dbh
 
     public function connect()
     {
-        $this->hostname = "localhost";
+        $this->hostname = "127.0.0.1";
         $this->username = "root";
         $this->password = "";
         $this->dbname = "zuriphp";
@@ -19,5 +19,8 @@ class Dbh
             echo "<script> alert('Error connecting to the database') </script>";
         } else
             return $conn;
+           
     }
+
+    
 }

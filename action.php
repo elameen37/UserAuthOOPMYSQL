@@ -1,9 +1,11 @@
 <?php
 
-require 'classes/Dbh.php';
-require 'classes/UserAuth.php';
-require 'classes/Route.php';
+session_start();
+require_once 'classes/Route.php';
+
+
 
 $route = new formController();
 
-$route->handleForm();
+ $route->handleForm();
+

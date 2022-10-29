@@ -20,9 +20,17 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item f-right">
-      <form action="php/action.php" method="POST" style=" background-color: inherit">
+      <form action="action.php" method="POST" style=" background-color: inherit">
         <button type="submit" name="logout" style="background-color: transparent; border: none">Logout</button>
      </form>
+    <?php 
+    if(isset($_GET['login'])) {
+      $login = $_GET['login'];
+      if ($login == "Success") {
+        echo "<script> alert('Login was Successful');</script> ";
+      } 
+    }
+    ?>
       </li>
   </div>
 </nav>
@@ -39,8 +47,9 @@
     </h1>
     <br>
       <h2 style="align-content: center">
-        Here is a list of Students, their emails and Countries, Happey to Contact them?!
+        Here is a list of Students, their emails and Countries, Happy to Contact them?!
       </h2>
+    
     </div>
 
      <form action="./action.php" method="POST" class="form" style="text-align: center; margin-top: 5%">
