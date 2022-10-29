@@ -1,5 +1,6 @@
 <?php
 include_once 'Dbh.php';
+
 //session_start();
 
 class UserAuth extends Dbh {
@@ -36,7 +37,7 @@ class UserAuth extends Dbh {
         if ($result->num_rows > 0) {
             $userData = $result->fetch_assoc();
             if ($userData['email'] === $email && $userData['password'] === $password) {
-                session_start();
+                //session_start();
 
                 $_SESSION['username'] = $userData['full_names'];
                 header("Location: dashboard.php?login=Success");
