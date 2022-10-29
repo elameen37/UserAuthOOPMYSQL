@@ -22,7 +22,7 @@ class UserAuth extends Dbh
             if ($this->confirmPasswordMatch($password, $confirmPassword)) {
                 $sql = "INSERT INTO Students (`full_names`, `email`, `password`, `country`, `gender`) VALUES ('$fullname','$email', '$password', '$country', '$gender')";
                 if ($conn->query($sql)) {
-                    echo "Ok";
+                    echo "Register Successful";
                 } else {
                     echo "Opps" . $conn->error;
                 }

@@ -11,15 +11,15 @@ class FormController extends UserAuth
     public $country;
     public $gender;
 
-    public function __construct() {   
+    public function __construct()
+    {
         parent::__construct();
-    
     }
 
     public function handleForm()
     {
-      
-        switch(true) {
+
+        switch (true) {
             case isset($_POST['register']):
                 //unpack all data for registering
                 $this->fullname = $_POST['fullnames'];
@@ -43,8 +43,8 @@ class FormController extends UserAuth
                 break;
             case isset($_POST['delete']):
                 //unpack all data for deleting
-                $this->email = $_POST['email'];
-                $this->deleteUser($this->email);
+                $this->id = $_POST['id'];
+                $this->deleteUser($this->id);
                 break;
             case isset($_POST['reset']):
                 //unpack all data for updating password
@@ -52,7 +52,8 @@ class FormController extends UserAuth
                 $this->password = $_POST['password'];
                 $this->updateUser($this->email, $this->password);
                 break;
-            case isset($_POST['all']):
+            case (isset($_POST['all']) || isset($_GET['all'])):
+                // case isset($_GET['all']):
                 //unpack all data for getting all users
                 $this->getAllUsers();
                 break;
