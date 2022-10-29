@@ -2,7 +2,7 @@
 include_once 'Dbh.php';
 //session_start();
 
-class UserAuth extends Dbh{
+class UserAuth extends Dbh {
     private static $db;
 
     public function __construct() {
